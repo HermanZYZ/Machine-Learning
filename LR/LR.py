@@ -1,19 +1,14 @@
 from numpy import *
 import matplotlib.pyplot as plt
 
-data_infile = "D:\\Junior Three\\Artificial Intelligence\\Lab5_LR\\train.csv"
-test_infile = "D:\\Junior Three\\Artificial Intelligence\\Lab5_LR\\test.csv"
+data_infile = "train.csv"
+test_infile = "test.csv"
 
-yanshou_tr = "D:\\Junior Three\\Artificial Intelligence\\Lab5_LR\\thurs9-10\\train.csv"
-yanshou_te = "D:\\Junior Three\\Artificial Intelligence\\Lab5_LR\\thurs9-10\\test.csv"
-
-pro_2_cla = "D:\\Junior Three\\Artificial Intelligence\\Project\\binary_classification\\new_train.csv"
-pro_2_test = "D:\\Junior Three\\Artificial Intelligence\\Project\\binary_classification\\new_test.csv"
 
 IteraterTime = 490 #867
 DIVIDE = (0.75, 0.25) #训练集和验证集的比例，四舍五入用round，返回浮点数
 
-def Read_data(infile, Col, is_test = False) : # 读入数据集，路径，列数，是否为测试集
+def Read_data(infile, Col, is_test = False) : # 读入数据集路径，列数，是否为测试集
     data = loadtxt(infile, dtype = float, usecols = range(Col) , delimiter=',')
     row = len(data)
     add = ones(row)
@@ -111,7 +106,7 @@ def Validation(w, valDataSet, valLabelSet) :
     return accuracy, recall, precision, f1
 
 if __name__ == '__main__' :
-    data, label = Read_data(pro_2_cla, 8)
+    data, label = Read_data(data_infile, 8)
     # test_data = Read_data(test_infile,40, True)
     #
     # ys_data, ys_label = Read_data(yanshou_tr, 7)
@@ -170,7 +165,7 @@ if __name__ == '__main__' :
     plt.legend()
     plt.show()
 
-    test_data = Read_data(pro_2_test, 7, True)
+    test_data = Read_data(test_infile, 7, True)
     predictLabel = Classify(best_w, test_data)
     f = open("Result.csv", 'w')
     for i in predictLabel:
